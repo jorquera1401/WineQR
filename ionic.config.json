@@ -1,0 +1,7 @@
+{
+  "name": "WineQR",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
