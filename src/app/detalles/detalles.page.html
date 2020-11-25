@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ciclo de Vida</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="resultado">
+    <ion-card-header>
+      <ion-card-subtitle>{{resultado.direccion}}</ion-card-subtitle>
+      <ion-card-title>{{resultado.nombre}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content text-center>
+      {{resultado.descripcion}}
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Plugins,CameraResultType,Capacitor,FilesystemDirectory,CameraPhoto,CameraSource, Camera } from "@capacitor/core";
+//import { Plugins,CameraResultType,Capacitor,FilesystemDirectory,CameraPhoto,CameraSource, Camera } from "@capacitor/core";
 
 
-const {Camera,Filesystem,Storage}=Plugins;
+//const {Camera,Filesystem,Storage}=Plugins;
 @Injectable({
   providedIn: 'root'
 })
 
 export class PhotoService {
-  public photos:Photo[]=[];
+  /*public photos:Photo[]=[];
   public async addNewToGallery(){
     
     const capturedPhoto = await Camera.getPhoto({
@@ -21,7 +21,7 @@ export class PhotoService {
       filepath:"soon...",
       webviewPath:capturedPhoto.webPath
     })
-  }
+  }*/
 }
 export interface Photo{
   filepath:string;
