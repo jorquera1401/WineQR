@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  QRScanner,QRScannerStatus} from "@ionic-native/qr-scanner/ngx";
+
 import {Router  } from "@angular/router";
 @Component({
   selector: 'app-home',
@@ -8,6 +9,7 @@ import {Router  } from "@angular/router";
 })
 export class HomePage implements OnInit {
   data : any;
+  codigoHash : string="";
   constructor(private qrScanner:QRScanner, private router:Router) { }
 
   
@@ -16,18 +18,24 @@ export class HomePage implements OnInit {
     
   }
   navegar():void{
-    this.router.navigate(['/detalle/1'])
+    console.log(this.codigoHash);
+    if(this.codigoHash.length>0){
+    this.router.navigate(['/detalle/'+this.codigoHash])
+    }else{
+      console.log("ingresar codigo")
+    }
   }
   capturar():void{
     this.qrScanner.prepare().then(
       (status:QRScannerStatus)=>{
         if(status.authorized){
-          let scanSub = this.qrScanner.scan().subscribe((text:string)=>{
-            console.log("Escaneo: ", text);
-            this.data=text;
+          let scanSub = this.qrScanner.scan().subscribe((codigo:string)=>{
+            console.log("Escaneo: ", codigo);
+            this.data=codigo;
             this.qrScanner.hide();
             scanSub.unsubscribe();
           });
+          
         }else if(status.denied){
           console.log("no se puede abrir");
         }else{

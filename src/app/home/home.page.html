@@ -13,7 +13,9 @@
       <ion-card-title>ViNo Qr</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      Aplicacion para obtener la trazabilidad de una botella de vino
+      Ingresar Codigo 
+      <ion-input type="text" [(ngModel)]="codigoHash" placeholder="Ingresar codigo"></ion-input>
+      <ion-button expand="block" (click)="navegar()" >Cargar Codigo</ion-button>
     </ion-card-content>
   </ion-card>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
@@ -21,9 +23,5 @@
       <ion-icon name="qr-code-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-fab vertical="bottom" horizontal="left" slot="fixed">
-    <ion-fab-button>
-      <ion-icon [routerLink]="['/detalle/1']" name="globe-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+
 </ion-content>

@@ -8,14 +8,30 @@
 </ion-header>
 
 <ion-content>
+  <ion-card *ngIf="error">
+     <ion-card-header>
+      <ion-card-title>No se encontraron Datos con el codigo</ion-card-title>
+    </ion-card-header>
+  </ion-card>
   <ion-card *ngIf="resultado">
     <ion-card-header>
+      <ion-card-subtitle>Datos viña</ion-card-subtitle>
       <ion-card-subtitle>{{resultado.direccion}}</ion-card-subtitle>
       <ion-card-title>{{resultado.nombre}}</ion-card-title>
     </ion-card-header>
     <ion-card-content text-center>
-      {{resultado.descripcion}}
+      {{resultado.descripcion}} 
     </ion-card-content>
-
+  </ion-card>
+  <ion-card *ngIf="resultado_predio">
+    <ion-card-header>
+      <ion-card-subtitle>Datos predio</ion-card-subtitle>
+      <ion-card-subtitle>{{resultado_predio.nombre}}</ion-card-subtitle>
+      <ion-card-title>{{resultado_predio.locacion}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content text-center>
+      {{resultado_predio.descripcion}}
+      {{resultado_predio.hash}}
+    </ion-card-content>
   </ion-card>
 </ion-content>

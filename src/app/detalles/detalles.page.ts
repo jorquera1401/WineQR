@@ -8,8 +8,10 @@ import { VinaService } from "src/app/services/vina.service";
   styleUrls: ['./detalles.page.scss'],
 })
 export class DetallesPage implements OnInit {
-
+  error : boolean;
   resultado:any;
+  resultado_predio : any;
+  hash:any;
   constructor(private activatedRoute:ActivatedRoute, private vinaService:VinaService) {
       
    }
@@ -19,17 +21,39 @@ export class DetallesPage implements OnInit {
     console.log("codigo: ",id);
     this.vinaService.getVina(id).subscribe(
       result=>{
+        if(result.length>0){
         console.log(result);
         let vina = {
           id : result[0].id,
           nombre: result[0].nombre,
           direccion:result[0].direccion,
-          descripcion : result[0].descripcion
-          
+          descripcion : result[0].descripcion,
+          hash : result[0].hash
         }
-        this.resultado=vina;
-        console.log(this.resultado)
+        this.hash=vina.hash;
+        this.resultado=vina; 
+        this.cargarPredio(vina.hash);
+      }else{
+        console.log("no hay datos");
+        this.error=true;
       }
+      }
+    )
+  }
+
+  cargarPredio(codigo:any):void{
+    this.vinaService.getPredio(codigo).subscribe(
+      result=>{
+        let predio = {
+          id : result[0].id,
+          nombre:result[0].nombre,
+          locacion :result[0].locacion,
+          tipo : result[0].tipo,
+          descripcion:result[0].descripcion
+          }
+          
+        this.resultado_predio = predio;
+        }
     )
   }
 
