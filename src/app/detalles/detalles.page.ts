@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { VinaService } from "src/app/services/vina.service";
+
+
 @Component({
   selector: 'app-detalles',
   templateUrl: './detalles.page.html',
@@ -12,7 +14,7 @@ export class DetallesPage implements OnInit {
   resultado:any;
   resultado_predio : any;
   hash:any;
-  constructor(private activatedRoute:ActivatedRoute, private vinaService:VinaService) {
+  constructor(private router:Router,private activatedRoute:ActivatedRoute, private vinaService:VinaService) {
       
    }
 
@@ -49,12 +51,18 @@ export class DetallesPage implements OnInit {
           nombre:result[0].nombre,
           locacion :result[0].locacion,
           tipo : result[0].tipo,
-          descripcion:result[0].descripcion
+          descripcion:result[0].descripcion,
+          hash : result[0].hash
           }
           
         this.resultado_predio = predio;
         }
     )
+    console.log(this.resultado_predio)
   }
+
+verCompleto():void{
+  this.router.navigate(['/ventana/'+this.resultado_predio.hash])
+}
 
 }

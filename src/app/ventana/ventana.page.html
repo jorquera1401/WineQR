@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start" *ngIf="caracteristica">
+      <ion-back-button defaultHref="detalle/{{caracteristica.hash}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Característica</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="caracteristica">
+<ion-card >
+  <ion-card-header>
+    <ion-card-title>{{caracteristica.nombre}} </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-img src="assets/predio.jpg"></ion-img>
+    {{caracteristica.descripcion}}
+    
+  </ion-card-content>
+ 
+</ion-card>
+ <ion-slides>
+      <ion-slide>
+      <ion-card>
+        <ion-card-header>
+        <ion-card-title>
+          Tipo de Vino
+        </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{caracteristica.tipo}}
+        </ion-card-content>
+        </ion-card>
+       </ion-slide>
+       <ion-slide>
+       <ion-card>
+        <ion-card-header>
+         <ion-card-title>
+          Locación Predio
+        </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{caracteristica.locacion}}
+        </ion-card-content>
+        </ion-card>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

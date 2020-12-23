@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path:'detalle/:id', 
     loadChildren:()=>import('./detalles/detalles.module').then(m=>m.DetallesPageModule)
+  },
+  {
+    path: 'ventana/:objeto',
+    loadChildren: () => import('./ventana/ventana.module').then( m => m.VentanaPageModule)
   }
 ];
 

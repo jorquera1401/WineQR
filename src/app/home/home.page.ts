@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {  QRScanner,QRScannerStatus} from "@ionic-native/qr-scanner/ngx";
-
+//import {  QRScanner,QRScannerStatus} from "@ionic-native/qr-scanner/ngx";
+import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
 import {Router  } from "@angular/router";
 @Component({
   selector: 'app-home',
@@ -10,7 +10,7 @@ import {Router  } from "@angular/router";
 export class HomePage implements OnInit {
   data : any;
   codigoHash : string="";
-  constructor(private qrScanner:QRScanner, private router:Router) { }
+  constructor(private barcodeScanner:BarcodeScanner, private router:Router) { }
 
   
 
@@ -25,6 +25,18 @@ export class HomePage implements OnInit {
       console.log("ingresar codigo")
     }
   }
+
+  capturar():void{
+    this.data=null;
+    this.barcodeScanner.scan().then(barcodeData=>{
+      console.log("Dato: ",barcodeData);
+      this.data=barcodeData;
+    }).catch(err=>{
+      console.log("Algun error", err);
+    });
+  }
+
+  /*
   capturar():void{
     this.qrScanner.prepare().then(
       (status:QRScannerStatus)=>{
@@ -43,7 +55,7 @@ export class HomePage implements OnInit {
         }
       }
     ).catch((e:any)=>console.log("error es "+e));
-  }
+  }*/
 
   
 

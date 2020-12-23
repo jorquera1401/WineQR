@@ -23,7 +23,7 @@
       {{resultado.descripcion}} 
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="resultado_predio">
+  <ion-card *ngIf="resultado_predio" (click)="verCompleto()">
     <ion-card-header>
       <ion-card-subtitle>Datos predio</ion-card-subtitle>
       <ion-card-subtitle>{{resultado_predio.nombre}}</ion-card-subtitle>
