@@ -13,6 +13,7 @@ export class DetallesPage implements OnInit {
   error : boolean;
   resultado:any;
   resultado_predio : any;
+  resultado_cosecha : any;
   hash:any;
   constructor(private router:Router,private activatedRoute:ActivatedRoute, private vinaService:VinaService) {
       
@@ -21,24 +22,50 @@ export class DetallesPage implements OnInit {
   ngOnInit() {
     let id = this.activatedRoute.snapshot.paramMap.get('id') ;
     console.log("codigo: ",id);
-    this.vinaService.getVina(id).subscribe(
+    this.cargarCosecha(id);
+  }
+
+  cargarCosecha(codigo:any):void{
+    this.vinaService.getCosecha(codigo).subscribe(
+      result =>{
+        if(result.length>0){
+          let cosecha ={
+            id: result[0].id,
+            humedad : result[0].humedad,
+            temperatura  :result[0].temperatura,
+            fecha : result[0].fecha,
+            descripcion :result[0].descripcion,
+            hash_salida : result[0].hash_salida,
+            hash_entrada : result[0].hash_entrada,
+          }
+          this.resultado_cosecha = cosecha;
+          this.hash = cosecha.hash_entrada;
+          this.cargarVina(cosecha.hash_entrada)   
+        }else{
+          console.log("no hay datos");
+          this.error = true;
+        }
+      }
+    );
+  }
+
+  cargarVina(codigo:any):void{
+    this.vinaService.getVina(codigo).subscribe(
       result=>{
         if(result.length>0){
-        console.log(result);
-        let vina = {
-          id : result[0].id,
-          nombre: result[0].nombre,
-          direccion:result[0].direccion,
-          descripcion : result[0].descripcion,
-          hash : result[0].hash
+          let vina ={
+            id : result[0].id,
+            nombre: result[0].nombre,
+            direccion:result[0].direccion,
+            descripcion : result[0].descripcion,
+            hash : result[0].hash
+          }
+          this.resultado=vina; 
+          this.cargarPredio(vina.hash); 
+        }else{
+          console.log("no hay datos");
+          this.error = true;
         }
-        this.hash=vina.hash;
-        this.resultado=vina; 
-        this.cargarPredio(vina.hash);
-      }else{
-        console.log("no hay datos");
-        this.error=true;
-      }
       }
     )
   }

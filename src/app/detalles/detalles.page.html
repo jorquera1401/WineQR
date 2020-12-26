@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card *ngIf="error">
      <ion-card-header>
-      <ion-card-title>No se encontraron Datos con el codigo</ion-card-title>
+      <ion-card-title>No se encontraron Datos con el codigo ingresado</ion-card-title>
     </ion-card-header>
   </ion-card>
   <ion-card *ngIf="resultado">
@@ -32,6 +32,17 @@
     <ion-card-content text-center>
       {{resultado_predio.descripcion}}
       {{resultado_predio.hash}}
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="resultado_cosecha">
+    <ion-card-header>
+      <ion-card-subtitle>Datos Cosecha</ion-card-subtitle>
+      <ion-card-title>Fecha Captura: {{resultado_cosecha.fecha}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content text-center>
+        <p>Temperatura: {{resultado_cosecha.temperatura}}°C</p>
+        <p>Humedad: {{resultado_cosecha.humedad}}%</p>
+        <p>Descripcion: {{resultado_cosecha.descripcion}}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>

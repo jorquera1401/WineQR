@@ -19,4 +19,8 @@ export class VinaService {
   getPredio(id:any):Observable<any>{
     return this.http.get('http://192.168.0.106:8000/api/predio/'+id);
   }
+
+  getCosecha(id:any):Observable<any>{
+    return this.http.get('http://192.168.0.106:8000/api/cosecha/'+id);
+  }
 }
