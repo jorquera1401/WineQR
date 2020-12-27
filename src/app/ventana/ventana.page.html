@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
      <ion-buttons slot="start" *ngIf="caracteristica">
       <ion-back-button defaultHref="detalle/{{caracteristica.hash}}"></ion-back-button>
     </ion-buttons>
@@ -28,6 +28,7 @@
         </ion-card-title>
         </ion-card-header>
         <ion-card-content>
+         <ion-icon name="wine" item-start large ></ion-icon>
           {{caracteristica.tipo}}
         </ion-card-content>
         </ion-card>

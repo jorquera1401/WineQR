@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
@@ -9,12 +9,12 @@
 
 <ion-content>
   <ion-card *ngIf="error">
-     <ion-card-header>
-      <ion-card-title>No se encontraron Datos con el codigo ingresado</ion-card-title>
+     <ion-card-header color="danger">
+      <ion-card-title>No se encontraron Datos con el codigo ingresado {{id}}</ion-card-title>
     </ion-card-header>
   </ion-card>
   <ion-card *ngIf="resultado">
-    <ion-card-header>
+    <ion-card-header class="cabeza">
       <ion-card-subtitle>Datos viña</ion-card-subtitle>
       <ion-card-subtitle>{{resultado.direccion}}</ion-card-subtitle>
       <ion-card-title>{{resultado.nombre}}</ion-card-title>
@@ -24,7 +24,7 @@
     </ion-card-content>
   </ion-card>
   <ion-card *ngIf="resultado_predio" (click)="verCompleto()">
-    <ion-card-header>
+    <ion-card-header class="cabeza">
       <ion-card-subtitle>Datos predio</ion-card-subtitle>
       <ion-card-subtitle>{{resultado_predio.nombre}}</ion-card-subtitle>
       <ion-card-title>{{resultado_predio.locacion}}</ion-card-title>
@@ -34,14 +34,14 @@
       {{resultado_predio.hash}}
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="resultado_cosecha">
-    <ion-card-header>
+  <ion-card *ngIf="resultado_cosecha" >
+    <ion-card-header class="cabeza">
       <ion-card-subtitle>Datos Cosecha</ion-card-subtitle>
-      <ion-card-title>Fecha Captura: {{resultado_cosecha.fecha}}</ion-card-title>
+      <ion-card-subtitle>Fecha Captura <ion-icon name="calendar-outline"></ion-icon>: <ion-text color="tertiary">{{resultado_cosecha.fecha}}</ion-text></ion-card-subtitle>
     </ion-card-header>
-    <ion-card-content text-center>
-        <p>Temperatura: {{resultado_cosecha.temperatura}}°C</p>
-        <p>Humedad: {{resultado_cosecha.humedad}}%</p>
+    <ion-card-content class="contenido" text-center>
+        <p>Temperatura <ion-icon name="thermometer-outline"></ion-icon>: {{resultado_cosecha.temperatura}}°C</p>
+        <p>Humedad &nbsp;&nbsp;&nbsp;&nbsp; <ion-icon name="cloud-outline"></ion-icon>: {{resultado_cosecha.humedad}}%</p>
         <p>Descripcion: {{resultado_cosecha.descripcion}}</p>
     </ion-card-content>
   </ion-card>

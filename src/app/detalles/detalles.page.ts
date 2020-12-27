@@ -11,6 +11,7 @@ import { VinaService } from "src/app/services/vina.service";
 })
 export class DetallesPage implements OnInit {
   error : boolean;
+  id:any;
   resultado:any;
   resultado_predio : any;
   resultado_cosecha : any;
@@ -20,9 +21,9 @@ export class DetallesPage implements OnInit {
    }
 
   ngOnInit() {
-    let id = this.activatedRoute.snapshot.paramMap.get('id') ;
-    console.log("codigo: ",id);
-    this.cargarCosecha(id);
+    this.id = this.activatedRoute.snapshot.paramMap.get('id') ;
+    console.log("codigo: ",this.id);
+    this.cargarCosecha(this.id);
   }
 
   cargarCosecha(codigo:any):void{

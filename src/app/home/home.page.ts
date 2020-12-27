@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
     this.data=null;
     this.barcodeScanner.scan().then(barcodeData=>{
       console.log("Dato: ",barcodeData);
-      this.data=barcodeData;
+      this.data=barcodeData.text;
       this.router.navigate(['detalle/'+this.data])
     }).catch(err=>{
       console.log("Algun error", err);

@@ -1,6 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Vino QR</ion-title>
+<ion-header >
+  <ion-toolbar color="success" >
+    <ion-title>Sistema Trazabilidad</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,16 +8,43 @@
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>
-        Trazabilidad del vino
+        Sistema para el Seguimiento de la Cadena de Valor en los Procesos de Produccion de Vino
       </ion-card-subtitle>
       <ion-card-title>ViNo Qr</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      Ingresar Codigo 
       <ion-input type="text" [(ngModel)]="codigoHash" placeholder="Ingresar codigo"></ion-input>
       <ion-button expand="block" (click)="navegar()" >Cargar Codigo</ion-button>
     </ion-card-content>
   </ion-card>
+   <ion-slides>
+      <ion-slide>
+      <ion-card class="contenido">
+       <ion-img  class="imagen" src="assets/home1.jpg"></ion-img>
+        <ion-card-header>
+        <ion-card-title>
+          Acerca de
+        </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+         <ion-text>Permite la visualización del ciclo de vida del proceso de producción del vino, con la captura de código QR generados en la botella de vino</ion-text>
+        </ion-card-content>
+        </ion-card>
+       </ion-slide>
+       <ion-slide>
+       <ion-card class="contenido">
+        <ion-img class="imagen" src="assets/home2.jpg"></ion-img>
+        <ion-card-header>
+         <ion-card-title>
+          ¿Cómo funciona?
+        </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-text>Presionar botón inferior para abrir cámara o Ingresando el código manualmente en campo de texto de arriba</ion-text>
+        </ion-card-content>
+        </ion-card>
+        </ion-slide>
+    </ion-slides>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="capturar()">
       <ion-icon name="qr-code-outline"></ion-icon>
