@@ -13,14 +13,18 @@ export class VinaService {
    * @param id identificador de la viña
    */
   getVina(id:any):Observable<any>{
-    return this.http.get('http://192.168.0.106:8000/api/vina/'+id);
+    return this.http.get('http://192.168.0.109:8000/api/vina/'+id);
   }
 
   getPredio(id:any):Observable<any>{
-    return this.http.get('http://192.168.0.106:8000/api/predio/'+id);
+    return this.http.get('http://192.168.0.109:8000/api/predio/'+id);
   }
 
   getCosecha(id:any):Observable<any>{
-    return this.http.get('http://192.168.0.106:8000/api/cosecha/'+id);
+    return this.http.get('http://192.168.0.109:8000/api/cosecha/'+id);
+  }
+
+  getCarga(id:any):Observable<any>{
+    return this.http.get('http://192.168.0.109:8000/api/carga/'+id);
   }
 }

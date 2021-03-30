@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Ciclo de Vida</ion-title>
+    <ion-title>Sistema de Trazabilidad</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,6 +13,7 @@
       <ion-card-title>No se encontraron Datos con el codigo ingresado {{id}}</ion-card-title>
     </ion-card-header>
   </ion-card>
+
   <ion-card *ngIf="resultado">
     <ion-card-header class="cabeza">
       <ion-card-subtitle>Datos viña</ion-card-subtitle>
@@ -45,4 +46,16 @@
         <p>Descripcion: {{resultado_cosecha.descripcion}}</p>
     </ion-card-content>
   </ion-card>
+
+  <ion-card *ngIf="resultado_carga" >
+    <ion-card-header class="cabeza">
+      <ion-card-subtitle>Datos Carga</ion-card-subtitle>
+      <ion-card-subtitle>Fecha Captura <ion-icon name="calendar-outline"></ion-icon>: <ion-text color="tertiary">{{resultado_carga.fecha}}</ion-text></ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="contenido" text-center>
+      <p>Peso <ion-icon name=""></ion-icon>:{{resultado_carga.peso}}
+    </ion-card-content>
+  </ion-card>
+
+
 </ion-content>

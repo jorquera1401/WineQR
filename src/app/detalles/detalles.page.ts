@@ -15,6 +15,7 @@ export class DetallesPage implements OnInit {
   resultado:any;
   resultado_predio : any;
   resultado_cosecha : any;
+  resultado_carga : any;
   hash:any;
   constructor(private router:Router,private activatedRoute:ActivatedRoute, private vinaService:VinaService) {
       
@@ -23,9 +24,39 @@ export class DetallesPage implements OnInit {
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') ;
     console.log("codigo: ",this.id);
-    this.cargarCosecha(this.id);
+    this.cargarCarga(this.id);
   }
 
+  /**
+   * Carga desde la API los valores de la carga
+   * @param codigo codigo hash que se captura desde el codigo QR
+   */
+  cargarCarga(codigo:any):void{
+    this.vinaService.getCarga(codigo).subscribe(
+      result =>{
+        if(result.length>0){
+          let carga ={
+            id : result[0].id,
+            peso : result[0].peso,
+            fecha : result[0].fecha,
+            descripcion : result[0].descripcion,
+            hash_salida : result[0].hash_salida,
+            hash_entrada : result[0].hash_entrada
+          }
+          this.resultado_carga = carga;
+          this.cargarCosecha(carga.hash_entrada)
+        }else{
+          console.log("No existen Datos");
+          this.error = true;
+        }
+      }
+    )
+  }
+
+  /**
+   * 
+   * @param codigo codigo hash de entrada que viene desde la funcion cargar Carga
+   */
   cargarCosecha(codigo:any):void{
     this.vinaService.getCosecha(codigo).subscribe(
       result =>{
