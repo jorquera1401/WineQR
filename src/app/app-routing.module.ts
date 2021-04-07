@@ -16,6 +16,18 @@ const routes: Routes = [
   {
     path: 'ventana/:objeto',
     loadChildren: () => import('./ventana/ventana.module').then( m => m.VentanaPageModule)
+  },
+  {
+    path: 'cosecha/:cosecha',
+    loadChildren:()=> import('./ventana/ventana.module').then(m=> m.VentanaPageModule)
+  },
+  {
+    path : 'carga/:carga',
+    loadChildren:()=> import('./ventana/ventana.module').then(m=>m.VentanaPageModule)
+  },
+  {
+    path: 'vina/:vina',
+    loadChildren:()=>import('./ventana/ventana.module').then(m=>m.VentanaPageModule)
   }
 ];
 

@@ -120,8 +120,19 @@ export class DetallesPage implements OnInit {
     console.log(this.resultado_predio)
   }
 
-verCompleto():void{
+verVina():void{
+  console.log(this.resultado.hash)
+  this.router.navigate(['/vina/'+this.resultado.hash])
+}
+verPredio():void{
   this.router.navigate(['/ventana/'+this.resultado_predio.hash])
+}
+verCosecha():void{
+  this.router.navigate(['/cosecha/'+this.resultado_cosecha.hash_salida])
+}
+verCarga():void{
+  this.router.navigate(['/carga/'+this.resultado_carga.hash_salida])
+
 }
 
 }

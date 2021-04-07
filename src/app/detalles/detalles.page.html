@@ -14,7 +14,7 @@
     </ion-card-header>
   </ion-card>
 
-  <ion-card *ngIf="resultado">
+  <ion-card *ngIf="resultado" (click)="verVina()">
     <ion-card-header class="cabeza">
       <ion-card-subtitle>Datos viña</ion-card-subtitle>
       <ion-card-subtitle>{{resultado.direccion}}</ion-card-subtitle>
@@ -24,7 +24,8 @@
       {{resultado.descripcion}} 
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="resultado_predio" (click)="verCompleto()">
+
+  <ion-card *ngIf="resultado_predio" (click)="verPredio()">
     <ion-card-header class="cabeza">
       <ion-card-subtitle>Datos predio</ion-card-subtitle>
       <ion-card-subtitle>{{resultado_predio.nombre}}</ion-card-subtitle>
@@ -35,7 +36,8 @@
       {{resultado_predio.hash}}
     </ion-card-content>
   </ion-card>
-  <ion-card *ngIf="resultado_cosecha" >
+
+  <ion-card *ngIf="resultado_cosecha" (click)="verCosecha()" >
     <ion-card-header class="cabeza">
       <ion-card-subtitle>Datos Cosecha</ion-card-subtitle>
       <ion-card-subtitle>Fecha Captura <ion-icon name="calendar-outline"></ion-icon>: <ion-text color="tertiary">{{resultado_cosecha.fecha}}</ion-text></ion-card-subtitle>
@@ -47,13 +49,13 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="resultado_carga" >
+  <ion-card *ngIf="resultado_carga" (click)="verCarga()">
     <ion-card-header class="cabeza">
       <ion-card-subtitle>Datos Carga</ion-card-subtitle>
       <ion-card-subtitle>Fecha Captura <ion-icon name="calendar-outline"></ion-icon>: <ion-text color="tertiary">{{resultado_carga.fecha}}</ion-text></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="contenido" text-center>
-      <p>Peso <ion-icon name=""></ion-icon>:{{resultado_carga.peso}}
+      <p>Peso <ion-icon name=""></ion-icon>:{{resultado_carga.peso}} KG
     </ion-card-content>
   </ion-card>
 
