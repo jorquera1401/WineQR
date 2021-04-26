@@ -1,18 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit,ElementRef,ViewChild, ChangeDetectorRef } from '@angular/core';
 import {ActivatedRoute  } from "@angular/router";
+import { ChartDataSets, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
 import {  VinaService} from "src/app/services/vina.service";
+ 
+ 
 
 @Component({
   selector: 'app-ventana',
   templateUrl: './ventana.page.html',
   styleUrls: ['./ventana.page.scss'],
 })
-export class VentanaPage implements OnInit {
+export class VentanaPage implements OnInit{
+
+ 
+  public chartData:ChartDataSets[] = [{data:[],label:'valor'}];
+  public chartType:ChartType='line';
+  public chartLabels : Label[];
+
   codigo : any;
   caracteristica:any;
   caracteristica_vina :any;
   caracteristica_cosecha : any;
   caracteristica_carga : any;
+  public caracteristica_bodega:any;
   constructor(private activatedRoute:ActivatedRoute, private vinaService:VinaService) { }
 
   //Recibo la informacion de lo que se hizo click en la ventana de detalle
@@ -21,7 +32,9 @@ export class VentanaPage implements OnInit {
     let id = this.activatedRoute.snapshot.paramMap.get('objeto');
     let ca = this.activatedRoute.snapshot.paramMap.get('carga');
     let vi = this.activatedRoute.snapshot.paramMap.get('vina');
-    console.log('vina',vi)
+    let bo = this.activatedRoute.snapshot.paramMap.get('bodega');
+
+ 
     if(id){
       this.cargarPredio(id);
     }
@@ -36,7 +49,25 @@ export class VentanaPage implements OnInit {
     if(vi){
       this.cargarVina(vi)
     }
+    if(bo){
+      this.cargarBodega(bo);
+      
+    }
   }
+  
+
+  ionViewDidEnter(){
+    if(this.caracteristica_bodega)
+      console.log('hola',this.caracteristica_bodega);
+  }
+
+  
+  cargarDataBodega(){
+    console.log(this.caracteristica_bodega);
+    this.chartLabels = this.caracteristica_bodega.hora; 
+  }
+ 
+
   cargarVina(id):void{
     console.log(id)
     this.vinaService.getVina(id).subscribe(
@@ -118,4 +149,40 @@ export class VentanaPage implements OnInit {
     console.log(this.caracteristica_carga);
     console.log("codigo : ",this.codigo);
   }
+
+
+  cargarBodega(id):void{
+    this.codigo = id;
+    this.vinaService.getBodega().subscribe(
+        result => {
+        
+          if(result){
+            let bodega = {
+              total : result.total,
+              humedadPromedio : result.humedadPromedio,
+              temperaturaPromedio : result.temperaturaPromedio,
+              temperatura : result.temperatura,
+              humedad : result.humedad,
+              fecha : result.fecha,
+              hora : result.hora,
+              primerRegistro : result.primerRegistro,
+              ultimoRegistro : result.ultimoRegistro,
+            }
+
+            this.chartData[0].data=[];
+            
+            this.chartLabels=[];
+            this.chartLabels = bodega.hora;
+            this.chartData[0].data = bodega.temperatura;
+            this.caracteristica_bodega = bodega;
+          }else{
+            console.log('No existen Datos Bodega');      
+         }
+        }
+    );
+  }
+
+ 
+
+
 }

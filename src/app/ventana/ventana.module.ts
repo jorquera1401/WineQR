@@ -8,12 +8,14 @@ import { VentanaPageRoutingModule } from './ventana-routing.module';
 
 import { VentanaPage } from './ventana.page';
 
+import {ChartsModule} from 'ng2-charts';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VentanaPageRoutingModule
+    VentanaPageRoutingModule,
+    ChartsModule
   ],
   declarations: [VentanaPage]
 })

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import {Observable} from 'rxjs';
 import { ActivatedRoute, Router } from "@angular/router";
 import { VinaService } from "src/app/services/vina.service";
-import { Chart } from 'chart.js';
+ 
 
 
 @Component({
@@ -12,7 +12,7 @@ import { Chart } from 'chart.js';
 })
 export class DetallesPage implements OnInit {
   
-  @ViewChild('barChart') barChart: ElementRef;
+ 
   bars:any;
   colorArray : any;
 

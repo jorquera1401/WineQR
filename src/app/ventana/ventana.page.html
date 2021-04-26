@@ -153,7 +153,7 @@
   <ion-card-content>
     <p> {{caracteristica_bodega.hora}}</p>
     <div style="position:relative;margin:auto;">
-      <canvas #barcanvas ></canvas>
+      <canvas baseChart [datasets]="chartData" [chartType]="chartType" [labels]="chartLabels"></canvas>
     </div>
     
   </ion-card-content>
