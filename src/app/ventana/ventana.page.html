@@ -127,6 +127,7 @@
   </ion-card-content>
  
 </ion-card>
+
 <ion-card>
   <ion-card-header>
   <ion-progress-bar type="indeterminate" reversed="true"></ion-progress-bar>
@@ -140,6 +141,22 @@
     <ion-card-title>Carga : {{caracteristica_carga.peso}} Kg </ion-card-title>
   </ion-card-content>
 </ion-card>
+</ion-content>
 
+<!--Parte Grafico Bodega-->
+
+<ion-content *ngIf="caracteristica_bodega">
+<ion-card >
+  <ion-card-header>
+    Gráfico
+  </ion-card-header>
+  <ion-card-content>
+    <p> {{caracteristica_bodega.hora}}</p>
+    <div style="position:relative;margin:auto;">
+      <canvas #barcanvas ></canvas>
+    </div>
+    
+  </ion-card-content>
+</ion-card>
 
 </ion-content>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {Observable} from 'rxjs';
 import { ActivatedRoute, Router } from "@angular/router";
 import { VinaService } from "src/app/services/vina.service";
+import { Chart } from 'chart.js';
 
 
 @Component({
@@ -10,12 +11,19 @@ import { VinaService } from "src/app/services/vina.service";
   styleUrls: ['./detalles.page.scss'],
 })
 export class DetallesPage implements OnInit {
+  
+  @ViewChild('barChart') barChart: ElementRef;
+  bars:any;
+  colorArray : any;
+
+
   error : boolean;
   id:any;
   resultado:any;
   resultado_predio : any;
   resultado_cosecha : any;
   resultado_carga : any;
+  resultado_bodega : any;
   hash:any;
   constructor(private router:Router,private activatedRoute:ActivatedRoute, private vinaService:VinaService) {
       
@@ -25,7 +33,12 @@ export class DetallesPage implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') ;
     console.log("codigo: ",this.id);
     this.cargarCarga(this.id);
+    this.cargarBodega();
+ 
   }
+ 
+ 
+
 
   /**
    * Carga desde la API los valores de la carga
@@ -53,6 +66,35 @@ export class DetallesPage implements OnInit {
     )
   }
 
+  async cargarBodega(){
+  await this.vinaService.getBodega().subscribe(
+      result => {
+        console.log(result);
+        console.log("codigo hash: ",)
+        if(result){
+          let bodega = {
+            total : result.total,
+            humedadPromedio : result.humedadPromedio,
+            temperaturaPromedio : result.temperaturaPromedio,
+            temperatura : result.temperatura,
+            humedad : result.humedad,
+            fecha : result.fecha,
+            hora : result.hora,
+            primerRegistro : result.primerRegistro,
+            ultimoRegistro : result.ultimoRegistro,
+          
+          }
+           this.resultado_bodega = bodega;
+
+        }else{
+          console.log('No existen Datos Bodega');
+          this.error  =true; 
+       }
+      }
+    )
+  }
+
+
   /**
    * 
    * @param codigo codigo hash de entrada que viene desde la funcion cargar Carga
@@ -72,6 +114,7 @@ export class DetallesPage implements OnInit {
           }
           this.resultado_cosecha = cosecha;
           this.hash = cosecha.hash_entrada;
+          console.log("Codigo en Cosecha: "+this.hash);
           this.cargarVina(cosecha.hash_entrada)   
         }else{
           console.log("no hay datos");
@@ -81,6 +124,10 @@ export class DetallesPage implements OnInit {
     );
   }
 
+  /**
+   * Funcion que  permite cargar desde la api los datos de la viña
+   * @param codigo codigo hash que identifica la viña
+   */
   cargarVina(codigo:any):void{
     this.vinaService.getVina(codigo).subscribe(
       result=>{
@@ -95,13 +142,16 @@ export class DetallesPage implements OnInit {
           this.resultado=vina; 
           this.cargarPredio(vina.hash); 
         }else{
-          console.log("no hay datos");
+          console.log("no hay datos de viña");
           this.error = true;
         }
       }
     )
   }
-
+  /**
+   * Funcion que permite cargar datos desde la api con descripcion del predio de la viña
+   * @param codigo codigo hash que identifica del predio de la viña
+   */
   cargarPredio(codigo:any):void{
     this.vinaService.getPredio(codigo).subscribe(
       result=>{
@@ -120,6 +170,9 @@ export class DetallesPage implements OnInit {
     console.log(this.resultado_predio)
   }
 
+/**
+ * Cuando se presiona sobre la tarjeta de viña para visualizar el detalle
+ */
 verVina():void{
   console.log(this.resultado.hash)
   this.router.navigate(['/vina/'+this.resultado.hash])
@@ -133,6 +186,12 @@ verCosecha():void{
 verCarga():void{
   this.router.navigate(['/carga/'+this.resultado_carga.hash_salida])
 
+}
+
+verBodega():void{
+  let valores = this.id.split('c');
+  console.log(parseInt(valores[0]));
+  this.router.navigate(['/bodega/'+parseInt(valores[0])]);  
 }
 
 }

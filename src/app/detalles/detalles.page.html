@@ -59,5 +59,23 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card *ngIf="resultado_bodega" (click)="verBodega()" >
+    <ion-card-header class="cabeza">
+      <ion-card-subtitle>Resumen</ion-card-subtitle>
+      <ion-card-title>Bodega</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <p>Primer Registro : {{resultado_bodega.primerRegistro}}</p>
+        <p>Ultimo Registro : {{resultado_bodega.ultimoRegistro}}</p>
+        <p>Temperatura Promedio: {{resultado_bodega.temperaturaPromedio}}°C</p>
+        <p>Humedad Promedio : {{resultado_bodega.humedadPromedio}}%</p>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="!resultado_bodega">
+    Cargando ... 
+  </ion-card>
+
 
 </ion-content>

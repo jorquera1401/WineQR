@@ -27,4 +27,18 @@ export class VinaService {
   getCarga(id:any):Observable<any>{
     return this.http.get('http://192.168.0.109:8000/api/carga/'+id);
   }
+
+  getDescarga():Observable<any>{
+    return this.http.get('http://192.168.0.109:8000/api/descarga');
+  }
+
+  getAlmacen():Observable<any>{
+    return this.http.get('http://192.168.0.109:8000/api/almacen');
+  }
+
+  getBodega():Observable<any>{
+    return this.http.get('http://192.168.0.109:8000/api/bodega');
+  }
+
+
 }

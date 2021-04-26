@@ -10,10 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import {  BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
-
-
 import {  HttpClientModule} from "@angular/common/http";
-
+ 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
