@@ -148,15 +148,72 @@
 <ion-content *ngIf="caracteristica_bodega">
 <ion-card >
   <ion-card-header>
-    Gráfico
+    <ion-card-title>Bodega</ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <p> {{caracteristica_bodega.hora}}</p>
-    <div style="position:relative;margin:auto;">
-      <canvas baseChart [datasets]="chartData" [chartType]="chartType" [labels]="chartLabels"></canvas>
-    </div>
-    
+      
+      <canvas baseChart [datasets]="chartDataBodega" [chartType]="chartTypeBodega" [labels]="chartLabelsBodega" [colors]="chartColorsBodega"></canvas>
+      <ion-list class="ion-margin-top">
+        <ion-item>
+          <ion-label>Tipo de Gráfico</ion-label>
+          <ion-select [(ngModel)]="chartTypeBodega">
+            <ion-select-option value="line">Lineal</ion-select-option>
+            <ion-select-option value="bar">Barra</ion-select-option>
+            
+          </ion-select>
+        </ion-item>
+      </ion-list>
   </ion-card-content>
 </ion-card>
-
 </ion-content>
+
+
+<ion-content *ngIf="caracteristica_almacen">
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Almacen</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <canvas baseChart [datasets]="chartDataAlmacen" [chartType]="chartTypeAlmacen" [labels]="chartLabelsAlmacen" [colors]="chartColorsAlmacen"></canvas>
+    <ion-list class="ion-margin-top">
+        <ion-item>
+          <ion-label>Tipo de Gráfico</ion-label>
+          <ion-select [(ngModel)]="chartTypeAlmacen">
+            <ion-select-option value="line">Lineal</ion-select-option>
+            <ion-select-option value="bar">Barra</ion-select-option>
+            
+          </ion-select>
+        </ion-item>
+      </ion-list>
+  </ion-card-content>
+</ion-card>
+</ion-content>
+
+<ion-content *ngIf="!caracteristica_bodega && !caracteristica && !caracteristica_carga && !caracteristica_almacen && !caracteristica_cosecha && !caracteristica_vina ">
+  <ion-spinner name="dots"></ion-spinner>
+   <ion-list>
+    <ion-list-header>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+      </ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    </ion-list>
+</ion-content>
+
+

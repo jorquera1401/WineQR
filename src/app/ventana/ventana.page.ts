@@ -1,7 +1,7 @@
 import { Component, OnInit,AfterViewInit,ElementRef,ViewChild, ChangeDetectorRef } from '@angular/core';
 import {ActivatedRoute  } from "@angular/router";
 import { ChartDataSets, ChartType } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { Label,Color} from 'ng2-charts';
 import {  VinaService} from "src/app/services/vina.service";
  
  
@@ -14,9 +14,15 @@ import {  VinaService} from "src/app/services/vina.service";
 export class VentanaPage implements OnInit{
 
  
-  public chartData:ChartDataSets[] = [{data:[],label:'valor'}];
-  public chartType:ChartType='line';
-  public chartLabels : Label[];
+  public chartDataBodega:ChartDataSets[] = [{data:[],label:'Temperatura'},{data:[],label:"Humedad"}];
+  public chartTypeBodega:ChartType='line';
+  public chartTypeAlmacen:ChartType='line';
+  public chartLabelsBodega : Label[];
+  public chartColorsBodega : Color[] = [{backgroundColor:'#e3823d',borderColor:'#db4826'},{backgroundColor:'#51c1d9',borderColor:'#1c92ba'}];
+  public chartColorsAlmacen : Color[] = [{backgroundColor:'#fa542d',borderColor:'#cc0001'},{backgroundColor:'#cceef7',borderColor:'#4dbbd7'}];
+
+  public chartDataAlmacen:ChartDataSets[]  =[{data:[],label:'Temperatura'},{data:[],label:"Humedad"}];
+  public chartLabelsAlmacen : Label[];
 
   codigo : any;
   caracteristica:any;
@@ -24,6 +30,7 @@ export class VentanaPage implements OnInit{
   caracteristica_cosecha : any;
   caracteristica_carga : any;
   public caracteristica_bodega:any;
+  public caracteristica_almacen:any;
   constructor(private activatedRoute:ActivatedRoute, private vinaService:VinaService) { }
 
   //Recibo la informacion de lo que se hizo click en la ventana de detalle
@@ -51,21 +58,12 @@ export class VentanaPage implements OnInit{
     }
     if(bo){
       this.cargarBodega(bo);
+      this.cargarAlmacen();
       
     }
   }
   
 
-  ionViewDidEnter(){
-    if(this.caracteristica_bodega)
-      console.log('hola',this.caracteristica_bodega);
-  }
-
-  
-  cargarDataBodega(){
-    console.log(this.caracteristica_bodega);
-    this.chartLabels = this.caracteristica_bodega.hora; 
-  }
  
 
   cargarVina(id):void{
@@ -150,7 +148,10 @@ export class VentanaPage implements OnInit{
     console.log("codigo : ",this.codigo);
   }
 
-
+  /**
+   * Se cargan los graficos y las vistas 
+   * @param id 
+   */
   cargarBodega(id):void{
     this.codigo = id;
     this.vinaService.getBodega().subscribe(
@@ -169,17 +170,53 @@ export class VentanaPage implements OnInit{
               ultimoRegistro : result.ultimoRegistro,
             }
 
-            this.chartData[0].data=[];
+            this.chartDataBodega[0].data=[];
             
-            this.chartLabels=[];
-            this.chartLabels = bodega.hora;
-            this.chartData[0].data = bodega.temperatura;
+            this.chartLabelsBodega=[];
+            this.chartLabelsBodega = bodega.hora;
+            this.chartLabelsBodega[0]=bodega.primerRegistro.substring(0,11);
+            this.chartLabelsBodega[this.chartLabelsBodega.length-1]=bodega.ultimoRegistro.substring(0,11);
+
+            this.chartDataBodega[0].data=bodega.temperatura;
+            this.chartDataBodega[1].data = bodega.humedad;
             this.caracteristica_bodega = bodega;
           }else{
             console.log('No existen Datos Bodega');      
          }
         }
     );
+  }
+  async cargarAlmacen(){
+    await this.vinaService.getAlmacen().subscribe(
+      result=>{
+        if(result){
+          let almacen = {
+            total : result.total,
+            humedadPromedio:result.humedadPromedio,
+            temperaturaPromedio:result.temperaturaPromedio,
+            temperatura: result.temperatura,
+            humedad:result.humedad,
+            fecha:result.fecha,
+            hora:result.hora,
+            primerRegistro : result.primerRegistro,
+            ultimoRegistro : result.ultimoRegistro
+          }
+          this.chartDataAlmacen[0].data = [];
+
+          this.chartLabelsAlmacen=[];
+          this.chartLabelsAlmacen = almacen.hora;
+          this.chartLabelsAlmacen[0] = almacen.primerRegistro.substring(0,11);
+          this.chartLabelsAlmacen[this.chartLabelsAlmacen.length-1] = almacen.ultimoRegistro.substring(0,11);
+
+
+          this.chartDataAlmacen[0].data = almacen.temperatura;
+          this.chartDataAlmacen[1].data = almacen.humedad;
+          this.caracteristica_almacen = almacen;                 
+        }else{
+          console.log("No existen registro de Almacen");
+        }
+      }
+    )
   }
 
  

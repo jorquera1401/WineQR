@@ -24,6 +24,7 @@ export class DetallesPage implements OnInit {
   resultado_cosecha : any;
   resultado_carga : any;
   resultado_bodega : any;
+  resultado_almacen:any;
   hash:any;
   constructor(private router:Router,private activatedRoute:ActivatedRoute, private vinaService:VinaService) {
       
@@ -69,17 +70,11 @@ export class DetallesPage implements OnInit {
   async cargarBodega(){
   await this.vinaService.getBodega().subscribe(
       result => {
-        console.log(result);
-        console.log("codigo hash: ",)
         if(result){
           let bodega = {
             total : result.total,
             humedadPromedio : result.humedadPromedio,
             temperaturaPromedio : result.temperaturaPromedio,
-            temperatura : result.temperatura,
-            humedad : result.humedad,
-            fecha : result.fecha,
-            hora : result.hora,
             primerRegistro : result.primerRegistro,
             ultimoRegistro : result.ultimoRegistro,
           
@@ -92,6 +87,20 @@ export class DetallesPage implements OnInit {
        }
       }
     )
+  await this.vinaService.getAlmacen().subscribe(
+    result=>{
+      if(result){
+        let almacen = {
+          total : result.total,
+          humedadPromedio:result.humedadPromedio,
+          temperaturaPromedio:result.temperaturaPromedio,
+          primerRegistro : result.primerRegistro,
+          ultimoRegistro : result.ultimoRegistro
+        }
+        this.resultado_almacen = almacen;
+      }
+    }
+  )
   }
 
 
@@ -189,9 +198,9 @@ verCarga():void{
 }
 
 verBodega():void{
-  let valores = this.id.split('c');
-  console.log(parseInt(valores[0]));
-  this.router.navigate(['/bodega/'+parseInt(valores[0])]);  
+  // let valores = this.id.split('c');
+  // console.log(parseInt(valores[0]));
+  this.router.navigate(['/bodega/'+this.id]);  
 }
 
 }
