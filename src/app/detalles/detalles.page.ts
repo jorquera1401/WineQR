@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import {Observable} from 'rxjs';
 import { ActivatedRoute, Router } from "@angular/router";
 import { VinaService } from "src/app/services/vina.service";
+import { AstMemoryEfficientTransformer } from '@angular/compiler';
  
 
 
@@ -25,6 +26,7 @@ export class DetallesPage implements OnInit {
   resultado_carga : any;
   resultado_bodega : any;
   resultado_almacen:any;
+  resultado_descarga:any;
   hash:any;
   constructor(private router:Router,private activatedRoute:ActivatedRoute, private vinaService:VinaService) {
       
@@ -34,6 +36,7 @@ export class DetallesPage implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') ;
     console.log("codigo: ",this.id);
     this.cargarCarga(this.id);
+    this.cargarDescarga();
     this.cargarBodega();
  
   }
@@ -67,40 +70,56 @@ export class DetallesPage implements OnInit {
     )
   }
 
-  async cargarBodega(){
-  await this.vinaService.getBodega().subscribe(
-      result => {
+  async cargarDescarga(){
+    await this.vinaService.getDescarga().subscribe(
+      result=>{
         if(result){
-          let bodega = {
+          let descarga = {
             total : result.total,
-            humedadPromedio : result.humedadPromedio,
-            temperaturaPromedio : result.temperaturaPromedio,
-            primerRegistro : result.primerRegistro,
-            ultimoRegistro : result.ultimoRegistro,
-          
+            promedio : result.promedioDistancia
           }
-           this.resultado_bodega = bodega;
-
+          this.resultado_descarga = descarga;
         }else{
-          console.log('No existen Datos Bodega');
-          this.error  =true; 
-       }
+          console.log('no existen datos de descarga');
+        }
       }
     )
-  await this.vinaService.getAlmacen().subscribe(
-    result=>{
-      if(result){
-        let almacen = {
-          total : result.total,
-          humedadPromedio:result.humedadPromedio,
-          temperaturaPromedio:result.temperaturaPromedio,
-          primerRegistro : result.primerRegistro,
-          ultimoRegistro : result.ultimoRegistro
+  }
+
+  async cargarBodega(){
+    await this.vinaService.getBodega().subscribe(
+        result => {
+          if(result){
+            let bodega = {
+              total : result.total,
+              humedadPromedio : result.humedadPromedio,
+              temperaturaPromedio : result.temperaturaPromedio,
+              primerRegistro : result.primerRegistro,
+              ultimoRegistro : result.ultimoRegistro,
+            
+            }
+            this.resultado_bodega = bodega;
+
+          }else{
+            console.log('No existen Datos Bodega');
+            this.error  =true; 
         }
-        this.resultado_almacen = almacen;
+        }
+      )
+    await this.vinaService.getAlmacen().subscribe(
+      result=>{
+        if(result){
+          let almacen = {
+            total : result.total,
+            humedadPromedio:result.humedadPromedio,
+            temperaturaPromedio:result.temperaturaPromedio,
+            primerRegistro : result.primerRegistro,
+            ultimoRegistro : result.ultimoRegistro
+          }
+          this.resultado_almacen = almacen;
+        }
       }
-    }
-  )
+    )
   }
 
 
@@ -201,6 +220,10 @@ verBodega():void{
   // let valores = this.id.split('c');
   // console.log(parseInt(valores[0]));
   this.router.navigate(['/bodega/'+this.id]);  
+}
+
+verDescarga():void{
+  this.router.navigate(['/descarga/'+this.id]);
 }
 
 }

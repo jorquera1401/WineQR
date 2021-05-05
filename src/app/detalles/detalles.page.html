@@ -58,6 +58,16 @@
       <p>Peso <ion-icon name=""></ion-icon>:{{resultado_carga.peso}} KG
     </ion-card-content>
   </ion-card>
+  
+  <ion-card *ngIf="resultado_descarga" (click)="verDescarga()">
+    <ion-card-header class="dinamico-cabeza">
+      <ion-card-subtitle>Datos Descarga</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="dinamico" text-center>
+      <p>Total Descarga Bodega <ion-icon name=""></ion-icon>:{{resultado_descarga.total}} </p>
+      <p>Distancia Promedio Carro {{resultado_descarga.promedio}} mts </p>
+    </ion-card-content>
+  </ion-card>
 
   <ion-card *ngIf="resultado_bodega" (click)="verBodega()" >
     <ion-card-header class="dinamico-cabeza">

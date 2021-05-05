@@ -8,3 +8,21 @@
     --ion-background-color: #ff7a7a;
 
 }
+
+.vignette {
+    position: relative;
+  }
+  
+  .vignette img {
+    display: block;
+  }
+ 
+  .vignette:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 0 150px 30px rgba(0, 0, 0, 1) inset;
+  }

@@ -32,7 +32,11 @@ const routes: Routes = [
   {
     path: 'bodega/:bodega',
     loadChildren:()=>import('./ventana/ventana.module').then(m=>m.VentanaPageModule)
-  }
+  },
+  {
+    path: 'descarga/:descarga',
+    loadChildren:()=>import('./ventana/ventana.module').then(m=>m.VentanaPageModule)
+  },
 ];
 
 

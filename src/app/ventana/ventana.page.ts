@@ -15,14 +15,23 @@ export class VentanaPage implements OnInit{
 
  
   public chartDataBodega:ChartDataSets[] = [{data:[],label:'Temperatura'},{data:[],label:"Humedad"}];
+  public chartDataAlmacen:ChartDataSets[]  =[{data:[],label:'Temperatura'},{data:[],label:"Humedad"}];
+  public chartDataDescarga:ChartDataSets[]  =[{data:[],label:'Distancia Estacionamiento (mts)'}];
+  
   public chartTypeBodega:ChartType='line';
   public chartTypeAlmacen:ChartType='line';
-  public chartLabelsBodega : Label[];
+  public chartTypeDescarga:ChartType='line';
+
+  
   public chartColorsBodega : Color[] = [{backgroundColor:'#e3823d',borderColor:'#db4826'},{backgroundColor:'#51c1d9',borderColor:'#1c92ba'}];
   public chartColorsAlmacen : Color[] = [{backgroundColor:'#fa542d',borderColor:'#cc0001'},{backgroundColor:'#cceef7',borderColor:'#4dbbd7'}];
+  public chartColorsDescarga : Color[] = [{backgroundColor:'#fa542d',borderColor:'#cc0001'}];
 
-  public chartDataAlmacen:ChartDataSets[]  =[{data:[],label:'Temperatura'},{data:[],label:"Humedad"}];
+
   public chartLabelsAlmacen : Label[];
+  public chartLabelsBodega : Label[];
+  public chartLabelsDescarga : Label[];
+
 
   codigo : any;
   caracteristica:any;
@@ -31,6 +40,16 @@ export class VentanaPage implements OnInit{
   caracteristica_carga : any;
   public caracteristica_bodega:any;
   public caracteristica_almacen:any;
+  public caracteristica_descarga : any;
+  
+  //Imagenes
+  public imagenVina     :any;
+  public imagenPredio   :any;
+  public imagenCosecha  :any;
+  public imagenCarga    :any;
+  public imagenDescarga :any;
+  public imagenAlmacen  :any;
+  public imagenBodega   :any;
   constructor(private activatedRoute:ActivatedRoute, private vinaService:VinaService) { }
 
   //Recibo la informacion de lo que se hizo click en la ventana de detalle
@@ -40,26 +59,35 @@ export class VentanaPage implements OnInit{
     let ca = this.activatedRoute.snapshot.paramMap.get('carga');
     let vi = this.activatedRoute.snapshot.paramMap.get('vina');
     let bo = this.activatedRoute.snapshot.paramMap.get('bodega');
+    let de = this.activatedRoute.snapshot.paramMap.get('descarga');
 
  
     if(id){
       this.cargarPredio(id);
+      this.getPredioImage();
     }
     
     if(co){
       this.cargarCosecha(co);
+      this.getCosechaImage();
 
     }
     if(ca){
       this.cargarCarga(ca);
+      this.getCargaImage();
     }
     if(vi){
-      this.cargarVina(vi)
+      this.cargarVina(vi);
+      this.getVinaImage();
     }
     if(bo){
       this.cargarBodega(bo);
       this.cargarAlmacen();
-      
+    }
+    if(de){
+      console.log(de);
+      this.cargarDescarga(de);
+      this.getDescargaImage();
     }
   }
   
@@ -84,6 +112,8 @@ export class VentanaPage implements OnInit{
     )
     console.log(this.caracteristica_vina)
   }
+
+
 
   cargarPredio(id):void{
     console.log("Datos Predio : "+id);    
@@ -218,8 +248,109 @@ export class VentanaPage implements OnInit{
       }
     )
   }
+  async cargarDescarga(id){
+    this.codigo =id;
+    await this.vinaService.getDescarga().subscribe(
+      result=>{
+        if(result){
+          let descarga = {
+            total : result.total,
+            promedio : result.promedioDistancia,
+            fecha : result.fecha,
+            hora : result.hora,
+            distancia : result.distancia
+          }
+          this.caracteristica_descarga = descarga;
+          this.chartDataDescarga[0].data = [];
+          this.chartLabelsDescarga = descarga.hora;
+          this.chartLabelsDescarga[0] = descarga.fecha[0];
+          this.chartLabelsDescarga[this.chartLabelsDescarga.length-1]=descarga.fecha[descarga.fecha.length-1];
+          this.chartDataDescarga[0].data = descarga.distancia;
+        }else{
+          console.log('No existen Registros de Descarga')
+        }
+      }
+    )
+  }
 
  
+  async getVinaImage(){
+    await this.vinaService.getVinaImage().subscribe(
+      result =>{
+        let vina = {
+          imagen : result.imagen
+        }
+        this.imagenVina = vina.imagen;
+      }
+    )
+  }
 
+  async getPredioImage(){
+    await this.vinaService.getPredioImage().subscribe(
+      result=>{
+        let predio = {
+          imagen : result.imagen
+        }
+        this.imagenPredio = predio.imagen;
+      }
+    )
+  }
+
+  async getCosechaImage(){
+    await this.vinaService.getCosechaImage().subscribe(
+      result=>{
+        let cosecha = {
+          imagen : result.imagen
+        }
+        this.imagenCosecha = cosecha.imagen;
+      }
+    )
+  }
+
+  async getCargaImage(){
+    await this.vinaService.getCargaImage().subscribe(
+      result =>{
+        let carga = {
+          imagen : result.imagen
+        }
+
+        this.imagenCarga = carga.imagen;
+        
+      }
+    )
+  }
+
+  async getDescargaImage(){
+    await this.vinaService.getDescargaImage().subscribe(
+      result =>{
+        let descarga = {
+          imagen:result.imagen
+        }
+        this.imagenDescarga = descarga.imagen;
+      }
+    )
+  }
+
+  async getAlmacenImage(){
+    await this.vinaService.getAlmacenImage().subscribe(
+      result=>{
+        let almacen = {
+          imagen:result.imagen
+        }
+        this.imagenAlmacen = almacen.imagen;
+      }
+    )
+  }
+
+  async getBodegaImage(){
+    await this.vinaService.getBodegaImage().subscribe(
+      result=>{
+        let bodega = {
+          imagen:result.imagen
+        }
+        this.imagenBodega = bodega.imagen;
+      }
+    )
+  }
 
 }

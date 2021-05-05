@@ -13,7 +13,9 @@
     <ion-card-title>{{caracteristica.nombre}} </ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <ion-img src="assets/predio.jpg"></ion-img>
+
+    <ion-img *ngIf="!imagenPredio" src="assets/predio.jpg"></ion-img>
+    <ion-img *ngIf="imagenPredio" src="{{imagenPredio}}"></ion-img>
     {{caracteristica.descripcion}}
     
   </ion-card-content>
@@ -55,7 +57,7 @@
     <ion-card-title>{{caracteristica_vina.nombre}} </ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <ion-img src="assets/Vina.jpg"></ion-img>
+    <ion-img src="{{imagenVina}}"></ion-img>
     <ion-card-title>{{caracteristica_vina.direccion}}</ion-card-title>
     {{caracteristica_vina.descripcion}}
     
@@ -70,7 +72,8 @@
     <ion-card-title>Datos de Cosecha </ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <ion-img src="assets/cosecha.jpg"></ion-img>
+    <ion-img *ngIf="!imagenCosecha" src="assets/cosecha.jpg"></ion-img>
+    <ion-img *ngIf="imagenCosecha" src="{{imagenCosecha}}"></ion-img>
     {{caracteristica_cosecha.descripcion}}
     
   </ion-card-content>
@@ -121,7 +124,8 @@
     <ion-card-title>Datos de Carga </ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <ion-img src="assets/carga.jpg"></ion-img>
+    <ion-img *ngIf="!imagenCarga" src="assets/carga.jpg"></ion-img>
+    <ion-img  *ngIf="imagenCarga" src="{{imagenCarga}}"></ion-img>
     {{caracteristica_carga.descripcion}}
     
   </ion-card-content>
@@ -167,6 +171,31 @@
 </ion-card>
 </ion-content>
 
+<ion-content *ngIf="caracteristica_descarga">
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Descarga</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+   <ion-img *ngIf="imagenDescarga" src="{{imagenDescarga}}"></ion-img>
+   <p><ion-label>Total Descargas en Bodega : </ion-label> {{caracteristica_descarga.total}}</p> 
+   <p><ion-label>Distancia Promedio Estacionamiento : </ion-label>{{caracteristica_descarga.promedio}} mts</p>
+   </ion-card-content>
+   <ion-card-content>
+    <canvas baseChart [datasets]="chartDataDescarga" [chartType]="chartTypeDescarga" [labels]="chartLabelsDescarga" [colors]="chartColorsDescarga"></canvas>
+    <ion-list class="ion-margin-top">
+        <ion-item>
+          <ion-label>Tipo de Gráfico</ion-label>
+          <ion-select [(ngModel)]="chartTypeDescarga">
+            <ion-select-option value="line">Lineal</ion-select-option>
+            <ion-select-option value="bar">Barra</ion-select-option>
+            
+          </ion-select>
+        </ion-item>
+      </ion-list>
+  </ion-card-content>
+</ion-card>
+</ion-content>
 
 <ion-content *ngIf="caracteristica_almacen">
 <ion-card>
@@ -189,12 +218,12 @@
 </ion-card>
 </ion-content>
 
-<ion-content *ngIf="!caracteristica_bodega && !caracteristica && !caracteristica_carga && !caracteristica_almacen && !caracteristica_cosecha && !caracteristica_vina ">
-  <ion-spinner name="dots"></ion-spinner>
+<ion-content *ngIf="!caracteristica_bodega && !caracteristica_descarga && !caracteristica && !caracteristica_carga && !caracteristica_almacen && !caracteristica_cosecha && !caracteristica_vina ">
+ 
    <ion-list>
     <ion-list-header>
       <ion-label>
-        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+        Obteniendo Datos
       </ion-label>
     </ion-list-header>
     <ion-item>
