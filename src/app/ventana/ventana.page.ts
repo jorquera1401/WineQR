@@ -9,23 +9,25 @@ import {  VinaService} from "src/app/services/vina.service";
 @Component({
   selector: 'app-ventana',
   templateUrl: './ventana.page.html',
-  styleUrls: ['./ventana.page.scss'],
+  styleUrls: ['./ventana.page.scss',
+  '../detalles/detalles.page.scss'],
 })
 export class VentanaPage implements OnInit{
 
  
-  public chartDataBodega:ChartDataSets[] = [{data:[],label:'Temperatura'},{data:[],label:"Humedad"}];
-  public chartDataAlmacen:ChartDataSets[]  =[{data:[],label:'Temperatura'},{data:[],label:"Humedad"}];
+  public chartDataBodega:ChartDataSets[] = [{data:[],label:'Temperatura',pointRadius:0},{data:[],label:"Humedad",pointRadius:0}];
+  public chartDataAlmacen:ChartDataSets[]  =[{data:[],label:'Temperatura',pointRadius:0},{data:[],label:"Humedad",pointRadius:0}];
   public chartDataDescarga:ChartDataSets[]  =[{data:[],label:'Distancia Estacionamiento (mts)'}];
   
   public chartTypeBodega:ChartType='line';
   public chartTypeAlmacen:ChartType='line';
   public chartTypeDescarga:ChartType='line';
+  
 
   
   public chartColorsBodega : Color[] = [{backgroundColor:'#e3823d',borderColor:'#db4826'},{backgroundColor:'#51c1d9',borderColor:'#1c92ba'}];
   public chartColorsAlmacen : Color[] = [{backgroundColor:'#fa542d',borderColor:'#cc0001'},{backgroundColor:'#cceef7',borderColor:'#4dbbd7'}];
-  public chartColorsDescarga : Color[] = [{backgroundColor:'#fa542d',borderColor:'#cc0001'}];
+  public chartColorsDescarga : Color[] = [{backgroundColor:'#fa542d',borderColor:'#cc0001',pointRadius:0}];
 
 
   public chartLabelsAlmacen : Label[];
@@ -54,13 +56,17 @@ export class VentanaPage implements OnInit{
 
   //Recibo la informacion de lo que se hizo click en la ventana de detalle
   ngOnInit() {
+    this.llamadasOrden();
+  }
+
+  public  llamadasOrden():void{
     let co = this.activatedRoute.snapshot.paramMap.get('cosecha');
     let id = this.activatedRoute.snapshot.paramMap.get('objeto');
     let ca = this.activatedRoute.snapshot.paramMap.get('carga');
     let vi = this.activatedRoute.snapshot.paramMap.get('vina');
     let bo = this.activatedRoute.snapshot.paramMap.get('bodega');
     let de = this.activatedRoute.snapshot.paramMap.get('descarga');
-
+    let al = this.activatedRoute.snapshot.paramMap.get('almacen');
  
     if(id){
       this.cargarPredio(id);
@@ -82,10 +88,14 @@ export class VentanaPage implements OnInit{
     }
     if(bo){
       this.cargarBodega(bo);
-      this.cargarAlmacen();
+      this.getBodegaImage();
+
+    }
+    if(al){
+      this.cargarAlmacen(al);
+      this.getAlmacenImage();
     }
     if(de){
-      console.log(de);
       this.cargarDescarga(de);
       this.getDescargaImage();
     }
@@ -216,7 +226,8 @@ export class VentanaPage implements OnInit{
         }
     );
   }
-  async cargarAlmacen(){
+  async cargarAlmacen(id){
+    this.codigo = id;
     await this.vinaService.getAlmacen().subscribe(
       result=>{
         if(result){

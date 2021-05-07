@@ -30,3 +30,21 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(205,179,213,1) 
 .estatico-cabeza{
     background: rgb(131,58,180);
     background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(183,148,111,1) 0%, rgba(206,188,80,1) 0%, rgba(235,227,180,1) 7%, rgba(255,254,251,1) 24%, rgba(250,247,229,1) 44%, rgba(238,232,181,1) 56%, rgba(241,235,192,1) 64%, rgba(212,198,72,1) 79%, rgba(206,192,81,1) 90%, rgba(206,192,81,1) 90%, rgba(163,153,139,1) 99%);}
+.header-static{
+    background-color: #FFDEE9;
+background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+
+}
+.header-dinamic{
+    background-color: #FFE53B;
+    background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
+    
+}
+h1,p,h2,h3,ion-text{
+    font-family: 'Times New Roman', Times, serif;
+}
+ion-img{
+    border-radius: 30%;
+    display: block;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

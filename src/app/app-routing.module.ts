@@ -34,6 +34,10 @@ const routes: Routes = [
     loadChildren:()=>import('./ventana/ventana.module').then(m=>m.VentanaPageModule)
   },
   {
+    path: 'almacen/:almacen',
+    loadChildren:()=>import('./ventana/ventana.module').then(m=>m.VentanaPageModule)
+  },
+  {
     path: 'descarga/:descarga',
     loadChildren:()=>import('./ventana/ventana.module').then(m=>m.VentanaPageModule)
   },

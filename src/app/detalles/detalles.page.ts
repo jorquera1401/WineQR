@@ -222,6 +222,10 @@ verBodega():void{
   this.router.navigate(['/bodega/'+this.id]);  
 }
 
+verAlmacen():void{
+  this.router.navigate(['/almacen/'+this.id]);
+}
+
 verDescarga():void{
   this.router.navigate(['/descarga/'+this.id]);
 }

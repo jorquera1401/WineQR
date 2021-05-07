@@ -15,91 +15,88 @@
   </ion-card>
 
   <ion-card *ngIf="resultado" (click)="verVina()">
-    <ion-card-header class="estatico-cabeza">
-      <ion-card-subtitle>Datos viña</ion-card-subtitle>
+    <ion-card-header class="header-static">
+      <ion-card-subtitle><b>Datos viña</b></ion-card-subtitle>
       <ion-card-subtitle>{{resultado.direccion}}</ion-card-subtitle>
       <ion-card-title>{{resultado.nombre}}</ion-card-title>
+ 
     </ion-card-header>
-    <ion-card-content text-center class="fuente">
-      {{resultado.descripcion}} 
-    </ion-card-content>
+   
   </ion-card>
 
   <ion-card *ngIf="resultado_predio" (click)="verPredio()">
-    <ion-card-header class="estatico-cabeza">
-      <ion-card-subtitle>Datos predio</ion-card-subtitle>
+    <ion-card-header class="header-static">
+      <ion-card-subtitle><b>Datos predio</b></ion-card-subtitle>
       <ion-card-subtitle>{{resultado_predio.nombre}}</ion-card-subtitle>
       <ion-card-title>{{resultado_predio.locacion}}</ion-card-title>
     </ion-card-header>
-    <ion-card-content text-center class="fuente">
-      {{resultado_predio.descripcion}}
-      {{resultado_predio.hash}}
-    </ion-card-content>
+    
   </ion-card>
 
   <ion-card *ngIf="resultado_cosecha" (click)="verCosecha()" >
-    <ion-card-header class="dinamico-cabeza">
-      <ion-card-subtitle>Datos Cosecha</ion-card-subtitle>
+    <ion-card-header class="header-dinamic">
+      <ion-card-subtitle><b>Datos Cosecha</b></ion-card-subtitle>
       <ion-card-subtitle>Fecha Captura <ion-icon name="calendar-outline"></ion-icon>: <ion-text color="tertiary">{{resultado_cosecha.fecha}}</ion-text></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="dinamico" text-center>
-        <p>Temperatura <ion-icon name="thermometer-outline"></ion-icon>: {{resultado_cosecha.temperatura}}°C</p>
-        <p>Humedad &nbsp;&nbsp;&nbsp;&nbsp; <ion-icon name="cloud-outline"></ion-icon>: {{resultado_cosecha.humedad}}%</p>
-        <p>Descripcion: {{resultado_cosecha.descripcion}}</p>
+        <p><b>Temperatura </b><ion-icon name="thermometer-outline"></ion-icon>: {{resultado_cosecha.temperatura}}°C</p>
+        <p><b>Humedad </b>&nbsp;&nbsp;&nbsp;&nbsp; <ion-icon name="cloud-outline"></ion-icon>: {{resultado_cosecha.humedad}}%</p>
+     
     </ion-card-content>
   </ion-card>
 
   <ion-card *ngIf="resultado_carga" (click)="verCarga()">
-    <ion-card-header class="dinamico-cabeza">
-      <ion-card-subtitle>Datos Carga</ion-card-subtitle>
+    <ion-card-header class="header-dinamic">
+      <ion-card-subtitle><b>Datos Carga</b></ion-card-subtitle>
       <ion-card-subtitle>Fecha Captura <ion-icon name="calendar-outline"></ion-icon>: <ion-text color="tertiary">{{resultado_carga.fecha}}</ion-text></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="dinamico" text-center>
-      <p>Peso <ion-icon name=""></ion-icon>:{{resultado_carga.peso}} KG
+      <p><b>Peso</b> <ion-icon name=""></ion-icon>:{{resultado_carga.peso}} KG
     </ion-card-content>
   </ion-card>
   
-  <ion-card *ngIf="resultado_descarga" (click)="verDescarga()">
-    <ion-card-header class="dinamico-cabeza">
-      <ion-card-subtitle>Datos Descarga</ion-card-subtitle>
+  <ion-card *ngIf="resultado_descarga && !error" (click)="verDescarga()">
+    <ion-card-header class="header-dinamic">
+      <ion-card-subtitle><b>Datos Descarga</b></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content class="dinamico" text-center>
-      <p>Total Descarga Bodega <ion-icon name=""></ion-icon>:{{resultado_descarga.total}} </p>
-      <p>Distancia Promedio Carro {{resultado_descarga.promedio}} mts </p>
+      <p><b>Total Descarga Bodega</b> <ion-icon name=""></ion-icon>:{{resultado_descarga.total}} </p>
+      <p><b>Distancia Promedio Carro</b> {{resultado_descarga.promedio}} mts </p>
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="resultado_bodega" (click)="verBodega()" >
-    <ion-card-header class="dinamico-cabeza">
-      <ion-card-subtitle>Resumen</ion-card-subtitle>
+  <ion-card *ngIf="resultado_bodega && !error" (click)="verBodega()" >
+    <ion-card-header class="header-dinamic">
+      <ion-card-subtitle><b>Resumen</b></ion-card-subtitle>
       <ion-card-title>Bodega</ion-card-title>
     </ion-card-header>
-    <ion-card-content class="fuente">
-        <p>Primer Registro : {{resultado_bodega.primerRegistro}}</p>
-        <p>Ultimo Registro : {{resultado_bodega.ultimoRegistro}}</p>
-        <p>Temperatura Promedio: {{resultado_bodega.temperaturaPromedio}}°C</p>
-        <p>Humedad Promedio : {{resultado_bodega.humedadPromedio}}%</p>
+    <ion-card-content class="dinamico">
+        <p><b>Primer Registro</b> : {{resultado_bodega.primerRegistro}}</p>
+        <p><b>Ultimo Registro</b> : {{resultado_bodega.ultimoRegistro}}</p>
+        <p><b>Temperatura Promedio</b>: {{resultado_bodega.temperaturaPromedio}}°C</p>
+        <p><b>Humedad Promedio    </b>: {{resultado_bodega.humedadPromedio}}%</p>
 
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="resultado_almacen" (click)="verBodega()" >
-    <ion-card-header class="dinamico-cabeza">
-      <ion-card-subtitle>Resumen</ion-card-subtitle>
+  <ion-card *ngIf="resultado_almacen && !error" (click)="verAlmacen()" >
+    <ion-card-header class="header-dinamic">
+      <ion-card-subtitle><b>Resumen</b></ion-card-subtitle>
       <ion-card-title>Almacen</ion-card-title>
     </ion-card-header>
-    <ion-card-content class="fuente">
-        <p>Primer Registro : {{resultado_almacen.primerRegistro}}</p>
-        <p>Ultimo Registro : {{resultado_almacen.ultimoRegistro}}</p>
-        <p>Temperatura Promedio: {{resultado_almacen.temperaturaPromedio}}°C</p>
-        <p>Humedad Promedio : {{resultado_almacen.humedadPromedio}}%</p>
-
+    <ion-card-content class="dinamico">
+        <ion-grid>
+        <ion-row><p><b>Primer Registro </b>: {{resultado_almacen.primerRegistro}}</p></ion-row>
+        <ion-row><p><b>Ultimo Registro </b>: {{resultado_almacen.ultimoRegistro}}</p></ion-row>
+        <ion-row><p><b>Temperatura Promedio</b>: {{resultado_almacen.temperaturaPromedio}}°C</p></ion-row>
+        <ion-row><p><b>Humedad Promedio </b>: {{resultado_almacen.humedadPromedio}}%</p></ion-row>
+        </ion-grid>
     </ion-card-content>
   </ion-card>
 
 </ion-content>
 
-<ion-content *ngIf="!resultado">
+<ion-content *ngIf="!resultado && !error">
  
    <ion-list >
     <ion-item *ngIf="!resultado">
@@ -182,6 +179,25 @@
         </p>
       </ion-label>
     </ion-item>
+        <ion-item *ngIf="!resultado_descarga">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+ 
+
+
     </ion-list>
 </ion-content>
 

@@ -7,43 +7,45 @@
   </ion-toolbar>
 </ion-header>
 <!--Parte de Predio-->
-<ion-content *ngIf="caracteristica">
-<ion-card >
-  <ion-card-header>
-    <ion-card-title>{{caracteristica.nombre}} </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
+<ion-content  *ngIf="caracteristica">
 
+<ion-card class="fondo-static"  >
+  <ion-card-header>
+    <ion-card-title><h1>{{caracteristica.nombre}}</h1> </ion-card-title>
     <ion-img *ngIf="!imagenPredio" src="assets/predio.jpg"></ion-img>
     <ion-img *ngIf="imagenPredio" src="{{imagenPredio}}"></ion-img>
-    {{caracteristica.descripcion}}
     
+  </ion-card-header>
+  <ion-card-content>
+<p>
+    {{caracteristica.descripcion}}
+   </p> 
   </ion-card-content>
  
-</ion-card>
- <ion-slides>
+</ion-card  >
+ <ion-slides class="fondo-static ">
       <ion-slide>
-      <ion-card>
+      <ion-card class="slides">
         <ion-card-header>
         <ion-card-title>
-          Tipo de Vino
+          <h3>Tipo de Vino</h3>
         </ion-card-title>
         </ion-card-header>
         <ion-card-content>
          <ion-icon name="wine" item-start large ></ion-icon>
-          {{caracteristica.tipo}}
+          <p>{{caracteristica.tipo}}</p>
         </ion-card-content>
         </ion-card>
        </ion-slide>
        <ion-slide>
-       <ion-card>
+       <ion-card class="slides">
         <ion-card-header>
          <ion-card-title>
-          Locación Predio
+          <h3>Locación Predio</h3>
         </ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          {{caracteristica.locacion}}
+          <p>{{caracteristica.locacion}}</p>
         </ion-card-content>
         </ion-card>
         </ion-slide>
@@ -52,14 +54,15 @@
 
 <!--Parte de Vina-->
 <ion-content *ngIf="caracteristica_vina">
-<ion-card >
-  <ion-card-header>
-    <ion-card-title>{{caracteristica_vina.nombre}} </ion-card-title>
+<ion-card class="fondo-static" >
+  <ion-card-header class="titulo">
+    <ion-card-title><h1>{{caracteristica_vina.nombre}} </h1></ion-card-title>
+     <ion-img class="imagen" src="{{imagenVina}}"></ion-img>
+   
   </ion-card-header>
   <ion-card-content>
-    <ion-img src="{{imagenVina}}"></ion-img>
-    <ion-card-title>{{caracteristica_vina.direccion}}</ion-card-title>
-    {{caracteristica_vina.descripcion}}
+    <ion-card-title><h3>{{caracteristica_vina.direccion}}</h3></ion-card-title>
+    <p>{{caracteristica_vina.descripcion}}</p>
     
   </ion-card-content>
 </ion-card>
@@ -67,51 +70,51 @@
 
 <!--Parte de Cosecha-->
 <ion-content *ngIf="caracteristica_cosecha">
-<ion-card class="fondo-temperatura">
+<ion-card class="fondo-dinamic">
   <ion-card-header>
-    <ion-card-title>Datos de Cosecha </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
+    <ion-card-title><h1>Datos de Cosecha</h1> </ion-card-title>
+    
     <ion-img *ngIf="!imagenCosecha" src="assets/cosecha.jpg"></ion-img>
     <ion-img *ngIf="imagenCosecha" src="{{imagenCosecha}}"></ion-img>
-    {{caracteristica_cosecha.descripcion}}
-    
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{caracteristica_cosecha.descripcion}}</p>
   </ion-card-content>
- 
 </ion-card>
-<ion-card>
+<ion-card class="fondo-dinamic">
+
   <ion-card-header>
   <ion-progress-bar type="indeterminate" reversed="true"></ion-progress-bar>
-    <ion-card-title>Fecha Captura </ion-card-title>
-    <ion-datetime readonly="true" value="{{caracteristica_cosecha.fecha}}" display-timezone="utc"></ion-datetime>
+    <ion-card-title><h3>Fecha Captura</h3> </ion-card-title>
+    <p><ion-datetime readonly="true" value="{{caracteristica_cosecha.fecha}}" display-timezone="utc"></ion-datetime></p>
 
   </ion-card-header>
 </ion-card>
  <ion-slides>
       <ion-slide>
-      <ion-card>
+      <ion-card class="fondo-dinamic slides">
         <ion-card-header>
         <ion-card-title>
-          Humedad 
+          <h3>Humedad </h3>
         </ion-card-title>
         </ion-card-header>
         <ion-card-content>
          <ion-icon name="cloudy"></ion-icon>
-          {{caracteristica_cosecha.humedad}}%
+          <p>{{caracteristica_cosecha.humedad}}%</p>
         </ion-card-content>
         </ion-card>
        </ion-slide>
        <ion-slide>
-       <ion-card class="fondo-temperatura">
+       <ion-card class="fondo-dinamic slides">
         <ion-card-header>
          <ion-card-title>
-          Temperatura
+          <h3>Temperatura</h3>
         </ion-card-title>
         </ion-card-header>
         <ion-card-content>
         <ion-icon name="thermometer"></ion-icon>
-          {{caracteristica_cosecha.temperatura}}°C
-        </ion-card-content>
+          <p>{{caracteristica_cosecha.temperatura}}°C</p>
+          </ion-card-content>
         </ion-card>
         </ion-slide>
     </ion-slides>
@@ -119,30 +122,33 @@
 
 <!--Parte de Carga-->
 <ion-content *ngIf="caracteristica_carga">
-<ion-card class="fondo-temperatura">
+<ion-card class="fondo-dinamic">
   <ion-card-header>
-    <ion-card-title>Datos de Carga </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
+    <ion-card-title><h1>Datos de Carga</h1> </ion-card-title>
+    
     <ion-img *ngIf="!imagenCarga" src="assets/carga.jpg"></ion-img>
     <ion-img  *ngIf="imagenCarga" src="{{imagenCarga}}"></ion-img>
-    {{caracteristica_carga.descripcion}}
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{caracteristica_carga.descripcion}}</p>
     
   </ion-card-content>
  
 </ion-card>
 
-<ion-card>
-  <ion-card-header>
-  <ion-progress-bar type="indeterminate" reversed="true"></ion-progress-bar>
-    <ion-card-title>Fecha Captura </ion-card-title>
-    <ion-datetime displayFormat="DDDD MMM D, YYYY" readonly="true" value="{{caracteristica_carga.fecha}}" display-timezone="utc"></ion-datetime>
-    <ion-card-title>Hora de Captura</ion-card-title>
-    <ion-datetime displayFormat="HH:mm" readonly="true" value="{{caracteristica_carga.fecha}}" display-timezone="utc"></ion-datetime>
+<ion-card class="fondo-dinamic">
+  <ion-card-header> 
+    <ion-card-title><h3>Fecha Captura</h3> </ion-card-title>
+    <p><ion-datetime displayFormat="DDDD MMM D, YYYY" readonly="true" value="{{caracteristica_carga.fecha}}" display-timezone="utc"></ion-datetime>
+    </p><ion-card-title><h3>Hora de Captura</h3></ion-card-title>
+    <p><ion-datetime displayFormat="HH:mm" readonly="true" value="{{caracteristica_carga.fecha}}" display-timezone="utc"></ion-datetime> Hrs
+    </p>
+    <ion-card-title><h3>Carga </h3></ion-card-title>
     
+    <p> {{caracteristica_carga.peso}} Kg</p>
   </ion-card-header>
   <ion-card-content>
-    <ion-card-title>Carga : {{caracteristica_carga.peso}} Kg </ion-card-title>
+    
   </ion-card-content>
 </ion-card>
 </ion-content>
@@ -156,7 +162,7 @@
   </ion-card-header>
   <ion-card-content>
       
-      <canvas baseChart [datasets]="chartDataBodega" [chartType]="chartTypeBodega" [labels]="chartLabelsBodega" [colors]="chartColorsBodega"></canvas>
+      <canvas baseChart  [datasets]="chartDataBodega" [chartType]="chartTypeBodega" [labels]="chartLabelsBodega" [colors]="chartColorsBodega"></canvas>
       <ion-list class="ion-margin-top">
         <ion-item>
           <ion-label>Tipo de Gráfico</ion-label>
