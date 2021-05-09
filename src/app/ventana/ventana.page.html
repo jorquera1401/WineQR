@@ -141,8 +141,7 @@
     <ion-card-title><h3>Fecha Captura</h3> </ion-card-title>
     <p><ion-datetime displayFormat="DDDD MMM D, YYYY" readonly="true" value="{{caracteristica_carga.fecha}}" display-timezone="utc"></ion-datetime>
     </p><ion-card-title><h3>Hora de Captura</h3></ion-card-title>
-    <p><ion-datetime displayFormat="HH:mm" readonly="true" value="{{caracteristica_carga.fecha}}" display-timezone="utc"></ion-datetime> Hrs
-    </p>
+    <p><ion-datetime displayFormat="HH:mm" readonly="true" value="{{caracteristica_carga.fecha}}" display-timezone="utc"></ion-datetime> </p>
     <ion-card-title><h3>Carga </h3></ion-card-title>
     
     <p> {{caracteristica_carga.peso}} Kg</p>
@@ -156,9 +155,10 @@
 <!--Parte Grafico Bodega-->
 
 <ion-content *ngIf="caracteristica_bodega">
-<ion-card >
+<ion-card  >
   <ion-card-header>
-    <ion-card-title>Bodega</ion-card-title>
+    <ion-card-title><h1>Bodega</h1></ion-card-title>
+    
   </ion-card-header>
   <ion-card-content>
       
@@ -175,18 +175,21 @@
       </ion-list>
   </ion-card-content>
 </ion-card>
+<ion-card *ngIf="imagenBodega" class="fondo-dinamic">
+<ion-card-header>
+  
+  <ion-img src="{{imagenBodega}}"></ion-img>
+  <ion-card-subtitle>Imagen</ion-card-subtitle>
+</ion-card-header>
+</ion-card>
 </ion-content>
 
 <ion-content *ngIf="caracteristica_descarga">
 <ion-card>
   <ion-card-header>
-    <ion-card-title>Descarga</ion-card-title>
+    <ion-card-title><h1>Descarga</h1></ion-card-title>
   </ion-card-header>
-  <ion-card-content>
-   <ion-img *ngIf="imagenDescarga" src="{{imagenDescarga}}"></ion-img>
-   <p><ion-label>Total Descargas en Bodega : </ion-label> {{caracteristica_descarga.total}}</p> 
-   <p><ion-label>Distancia Promedio Estacionamiento : </ion-label>{{caracteristica_descarga.promedio}} mts</p>
-   </ion-card-content>
+
    <ion-card-content>
     <canvas baseChart [datasets]="chartDataDescarga" [chartType]="chartTypeDescarga" [labels]="chartLabelsDescarga" [colors]="chartColorsDescarga"></canvas>
     <ion-list class="ion-margin-top">
@@ -201,12 +204,22 @@
       </ion-list>
   </ion-card-content>
 </ion-card>
+<ion-card class="fondo-dinamic">
+  <ion-card-header>
+  <p><ion-label>Total Descargas en Bodega : </ion-label> {{caracteristica_descarga.total}}</p> 
+   <p><ion-label>Distancia Promedio Estacionamiento : </ion-label>{{caracteristica_descarga.promedio}} mts</p>
+  </ion-card-header>
+  <ion-card-content>
+   <ion-img *ngIf="imagenDescarga" src="{{imagenDescarga}}"></ion-img>
+   
+   </ion-card-content>
+</ion-card>
 </ion-content>
 
 <ion-content *ngIf="caracteristica_almacen">
 <ion-card>
   <ion-card-header>
-    <ion-card-title>Almacen</ion-card-title>
+    <ion-card-title><h1>Almacen</h1></ion-card-title>
   </ion-card-header>
   <ion-card-content>
     <canvas baseChart [datasets]="chartDataAlmacen" [chartType]="chartTypeAlmacen" [labels]="chartLabelsAlmacen" [colors]="chartColorsAlmacen"></canvas>
@@ -221,6 +234,13 @@
         </ion-item>
       </ion-list>
   </ion-card-content>
+</ion-card>
+<ion-card *ngIf="imagenAlmacen" class="fondo-dinamic">
+<ion-card-header>
+  
+  <ion-img src="{{imagenAlmacen}}"></ion-img>
+  <ion-card-subtitle>Imagen</ion-card-subtitle>
+</ion-card-header>
 </ion-card>
 </ion-content>
 
