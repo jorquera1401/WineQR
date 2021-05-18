@@ -33,22 +33,96 @@
 
 .fondo-dinamic{
   background: linear-gradient(90deg, #fcff9e 0%, #c67700 100%);
+ 
+}
+.texto{
+  text-align: center;
+}
+.texto-descripcion{
+  text-align: justify;
 }
 .slides{
  
   width:90%;
 }
-
-ion-img{
-   
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  box-shadow: 0 0 150px 30px rgba(0, 0, 0, 1) inset;
  
-}
 ion-card-header{
   text-align: center;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;  
+}
+
+.relleno{
+
+  min-height: 80%;
+}
+
+.imagen-muestra{
+ margin:auto;
+}
+
+.humedad-alta{
+  background-image: url(/assets/halta.jpg) ;
+  background-size: cover;
+  -webkit-filter: blur(2px);
+  filter: blur(2px);
+  width: 100%;
+  position:relative;
+  height: 200px;
+}
+.humedad-media{
+  background-image: url(/assets/hmedia.jpg) ;
+  background-size: cover;
+  -webkit-filter: blur(2px);
+  filter: blur(2px);
+  width: 100%;
+  position:relative;
+  height: 200px;
+}
+.humedad-baja {
+  background-image: url(/assets/hbaja.jpg) ;
+  background-size: cover;
+  -webkit-filter: blur(2px);
+  filter: blur(2px);
+  width: 100%;
+  position:relative;
+  height: 200px;
+}
+.temperatura-alta{
+  background-image: url(/assets/talta.jpeg) ;
+  background-size: cover;
+  -webkit-filter: blur(2px);
+  filter: blur(2px);
+  width: 100%;
+  position:relative;
+  height: 200px;
+}
+.temperatura-media{
+  background-image: url(/assets/tmedia.jpg) ;
+  background-size: cover;
+  -webkit-filter: blur(2px);
+  filter: blur(2px);
+  width: 100%;
+  position:relative;
+  height: 200px;
+}
+.temperatura-baja {
+  background-image: url(/assets/tbaja.jpg) ;
+  background-size: cover;
+  -webkit-filter: blur(2px);
+  filter: blur(2px);
+  width: 100%;
+  position:relative;
+  height: 200px;
+}
+.texto-imagen{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  color: white;
+  text-transform: uppercase;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 25;
+  transform: translate(-50%, -50%);
 }
