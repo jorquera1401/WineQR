@@ -6,8 +6,8 @@ import {  Observable} from "rxjs";
 })
 export class VinaService {
 
-  direccion ='http://192.168.0.109';
-  puerto = ':8000'; 
+  direccion ='http://34.66.76.80';
+  puerto = ':80'; 
   urlVina = this.direccion+this.puerto+'/api/vina/';
   urlPredio = this.direccion+this.puerto+'/api/predio/';
   urlCosecha = this.direccion+this.puerto+'/api/cosecha/';
